@@ -6,5 +6,5 @@ export interface RequestData {
     pathname: string;
     headers: http.IncomingHttpHeaders;
     params: Record<string, string>;
-    body?: unknown;
+    body?: object;
 }

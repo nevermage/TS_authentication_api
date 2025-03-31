@@ -4,14 +4,13 @@ import {badRequestResponse, notAuthorizedResponse, successResponse} from "../res
 import {RequestData, UserData} from "../types";
 import {ValidationError} from "../errors/validationError";
 
-
 export async function loginController(request: RequestData, response: http.ServerResponse) {
     try {
-        if (!('username' in request.params && 'password' in request.params)) {
+        if (!(request.body && 'username' in request.body && 'password' in request.body)) {
             throw new ValidationError('username and password are required fields');
         }
 
-        const userData: UserData | false = await login(request.params['username'], request.params['password']);
+        const userData: UserData | false = await login(request.body.username as string, request.body.password as string);
 
         if (userData) {
             const accessToken: string = generateAccessToken(userData);
