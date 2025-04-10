@@ -1,0 +1,1 @@
+export type UserData = Record<string, string>
